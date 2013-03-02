@@ -1,0 +1,9 @@
+name: PrismApiDemo
+main: me.botsko.prismapidemo.PrismApiDemo
+version: nightly
+softdepend: [Prism]
+default: op
+commands:
+   demo:
+      description: Access demo commands
+      usage: /demo (subcmd)
