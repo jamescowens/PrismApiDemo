@@ -26,6 +26,10 @@ public class PrismApiDemo extends JavaPlugin {
     				RollbackExample.rollback( this, player );
     			}
     			
+    			if(args[0].equalsIgnoreCase("restore")){
+    				RestoreExample.restore( this, player );
+    			}
+    			
     			if(args[0].equalsIgnoreCase("custom")){
     				CustomEventExample.trigger( this, player );
     			}

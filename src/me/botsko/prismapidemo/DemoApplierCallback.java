@@ -31,5 +31,13 @@ public class DemoApplierCallback implements ApplierCallback {
 				sender.sendMessage( "Rollback with Prism API complete - " + result.getChangesApplied() + " reversals." );
 			}
 		}
+		// If it was a restore
+		if(result.getProcessType().equals(PrismProcessType.RESTORE)){
+			// If it's not a preview
+			if(!result.isPreview()){
+				// Tell the player
+				sender.sendMessage( "Restore with Prism API complete - " + result.getChangesApplied() + " changes re-applied." );
+			}
+		}
 	}
 }
