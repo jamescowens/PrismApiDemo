@@ -54,6 +54,10 @@ public class RollbackExample {
 			
 			// Limit how many results you get
 			parameters.setLimit(100);
+			
+			// Set the process type. The query builder and applier needs to know if
+			// we're doing a lookup, rollback, etc.
+			parameters.setProcessType(PrismProcessType.ROLLBACK);
 
 			/**
 			 * Next, pass the QueryParameters object to the actions query
@@ -64,7 +68,7 @@ public class RollbackExample {
 			QueryResult lookupResult = aq.lookup( parameters );
 			if(!lookupResult.getActionResults().isEmpty()){
 
-				Rollback rb = new Rollback( prism, player, PrismProcessType.ROLLBACK, lookupResult.getActionResults(), parameters );
+				Rollback rb = new Rollback( prism, player, PrismProcessType.ROLLBACK, lookupResult.getActionResults(), parameters, new DemoApplierCallback() );
 				rb.apply();
 				
 			} else {

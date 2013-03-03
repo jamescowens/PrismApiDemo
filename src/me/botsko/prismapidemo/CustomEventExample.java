@@ -3,6 +3,7 @@ package me.botsko.prismapidemo;
 import me.botsko.prism.Prism;
 import me.botsko.prism.actionlibs.ActionType;
 import me.botsko.prism.events.PrismCustomPlayerActionEvent;
+import me.botsko.prism.exceptions.InvalidActionException;
 
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -39,7 +40,12 @@ public class CustomEventExample {
 			 * to keep them separate.
 			 * 
 			 */
-			Prism.getActionRegistry().registerAction( new ActionType( "pr-api-demo", "player", "triggered" ) );
+			try {
+				Prism.getActionRegistry().registerCustomAction( plugin, new ActionType( "pr-api-demo", "player", "triggered" ) );
+			} catch (InvalidActionException e) {
+				// If something you register is incorrect, Prism will let you know in e.getMessage();
+				e.printStackTrace();
+			}
 			
 			
 			/**
