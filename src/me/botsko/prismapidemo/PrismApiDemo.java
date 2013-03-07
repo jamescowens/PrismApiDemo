@@ -5,6 +5,7 @@ import me.botsko.prism.actionlibs.ActionType;
 import me.botsko.prism.exceptions.InvalidActionException;
 import me.botsko.prismapidemo.customevent.CustomEventExample;
 import me.botsko.prismapidemo.customevent.DemoHandler;
+import me.botsko.prismapidemo.listeners.PrismMiscEvents;
 import me.botsko.prismapidemo.lookup.LookupExample;
 import me.botsko.prismapidemo.manual.CustomManualActionExample;
 import me.botsko.prismapidemo.restore.RestoreExample;
@@ -113,6 +114,9 @@ public class PrismApiDemo extends JavaPlugin {
 				e.printStackTrace();
 			}
 		}
+		
+		getServer().getPluginManager().registerEvents(new PrismMiscEvents(this), this);
+		
 	}
 	
 	
