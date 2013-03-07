@@ -1,30 +1,22 @@
-package me.botsko.prismapidemo;
+package me.botsko.prismapidemo.restore;
 
-import me.botsko.prism.Prism;
 import me.botsko.prism.actionlibs.ActionsQuery;
 import me.botsko.prism.actionlibs.QueryParameters;
 import me.botsko.prism.actionlibs.QueryResult;
 import me.botsko.prism.appliers.PrismProcessType;
 import me.botsko.prism.appliers.Restore;
+import me.botsko.prismapidemo.PrismApiDemo;
+import me.botsko.prismapidemo.callbacks.DemoApplierCallback;
 
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
 public class RestoreExample {
 	
 	
 	
-	public static void restore( Plugin plugin, Player player ){
+	public static void restore( PrismApiDemo plugin, Player player ){
 		
-		
-		/**
-		 * First you need to check for access to prism core. Generally you'll
-		 * want to do this in the onEnable portion of your plugin.
-		 */
-		Plugin _tempPrism = plugin.getServer().getPluginManager().getPlugin("Prism");
-		if (_tempPrism != null) {
-			// It exists, so cast it.
-			Prism prism = (Prism)_tempPrism;
+		if (plugin.getPrism() != null) {
 
 			/**
 			 * Next, you need to build a query parameter example. This
@@ -63,11 +55,11 @@ public class RestoreExample {
 			 * system. It will return a QueryResult object that contains
 			 * information about the results.
 			 */
-			ActionsQuery aq = new ActionsQuery(prism);
+			ActionsQuery aq = new ActionsQuery( plugin.getPrism() );
 			QueryResult lookupResult = aq.lookup( parameters );
 			if(!lookupResult.getActionResults().isEmpty()){
 
-				Restore rs = new Restore( prism, player, PrismProcessType.ROLLBACK, lookupResult.getActionResults(), parameters, new DemoApplierCallback() );
+				Restore rs = new Restore( plugin.getPrism(), player, PrismProcessType.ROLLBACK, lookupResult.getActionResults(), parameters, new DemoApplierCallback() );
 				rs.apply();
 				
 			} else {

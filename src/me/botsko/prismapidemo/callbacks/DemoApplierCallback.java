@@ -1,4 +1,4 @@
-package me.botsko.prismapidemo;
+package me.botsko.prismapidemo.callbacks;
 
 import me.botsko.prism.appliers.ApplierCallback;
 import me.botsko.prism.appliers.ApplierResult;

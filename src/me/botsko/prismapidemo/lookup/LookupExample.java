@@ -1,32 +1,23 @@
-package me.botsko.prismapidemo;
+package me.botsko.prismapidemo.lookup;
 
 import java.util.List;
 
-import me.botsko.prism.Prism;
 import me.botsko.prism.actionlibs.ActionsQuery;
 import me.botsko.prism.actionlibs.QueryParameters;
 import me.botsko.prism.actionlibs.QueryResult;
-import me.botsko.prism.actions.Action;
+import me.botsko.prism.actions.Handler;
+import me.botsko.prismapidemo.PrismApiDemo;
 
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
 public class LookupExample {
 	
 	
 	
-	public static void lookup( Plugin plugin, Player player ){
+	public static void lookup( PrismApiDemo plugin, Player player ){
 		
-		
-		/**
-		 * First you need to check for access to prism core. Generally you'll
-		 * want to do this in the onEnable portion of your plugin.
-		 */
-		Plugin _tempPrism = plugin.getServer().getPluginManager().getPlugin("Prism");
-		if (_tempPrism != null) {
-			// It exists, so cast it.
-			Prism prism = (Prism)_tempPrism;
-
+		if ( plugin.getPrism() != null) {
+	
 			/**
 			 * Next, you need to build a query parameter example. This
 			 * class allows you to define every condition you need
@@ -35,20 +26,15 @@ public class LookupExample {
 			 *
 			 * Check the QueryParameters class for all possible methods.
 			 * 
-			 * The following params essentially replicate /prism lookup a:block-break,block-place,api-demo r:20
+			 * The following params essentially replicate /prism near
 			 */
 			QueryParameters parameters = new QueryParameters();
 			
 			// Unless you want a truly global lookup, set a world name
 			parameters.setWorld("world");
 			
-			// Add many action types
-			parameters.addActionType("block-break");
-			parameters.addActionType("block-place");
-			parameters.addActionType("pr-api-demo");
-			
-			// Set radius to 20
-			parameters.setRadius(20);
+			// Set radius
+			parameters.setRadius(5);
 			
 			// Set min/max vectors from the current player's location - this essentially
 			// triggers the radius condition (Note: you must add a radius for this to work)
@@ -62,7 +48,7 @@ public class LookupExample {
 			 * system. It will return a QueryResult object that contains
 			 * information about the results.
 			 */
-			ActionsQuery aq = new ActionsQuery(prism);
+			ActionsQuery aq = new ActionsQuery( plugin.getPrism() );
 			QueryResult lookupResult = aq.lookup( parameters );
 			if(!lookupResult.getActionResults().isEmpty()){
 
@@ -73,9 +59,9 @@ public class LookupExample {
 				 *
 				 * What is returned is a List of Actions.
 				 */
-				List<Action> results = lookupResult.getActionResults();
+				List<Handler> results = lookupResult.getActionResults();
 				if(results != null){
-					for(Action a : results){
+					for(Handler a : results){
 						// An example that prints the player name and the action type.
 						// full action details will be available to you here.
 						player.sendMessage("Player " + a.getPlayerName() + " caused action " + a.getType().getName() + " on " + a.getNiceName() + " " + a.getAggregateCount() + " times" );
