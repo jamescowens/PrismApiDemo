@@ -60,7 +60,7 @@ public class RollbackExample {
 			QueryResult lookupResult = aq.lookup( parameters );
 			if(!lookupResult.getActionResults().isEmpty()){
 
-				Rollback rb = new Rollback( plugin.getPrism(), player, PrismProcessType.ROLLBACK, lookupResult.getActionResults(), parameters, new DemoApplierCallback() );
+				Rollback rb = new Rollback( plugin.getPrism(), player, lookupResult.getActionResults(), parameters, new DemoApplierCallback() );
 				rb.apply();
 				
 			} else {

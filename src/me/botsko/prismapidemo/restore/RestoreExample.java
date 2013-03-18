@@ -59,7 +59,7 @@ public class RestoreExample {
 			QueryResult lookupResult = aq.lookup( parameters );
 			if(!lookupResult.getActionResults().isEmpty()){
 
-				Restore rs = new Restore( plugin.getPrism(), player, PrismProcessType.ROLLBACK, lookupResult.getActionResults(), parameters, new DemoApplierCallback() );
+				Restore rs = new Restore( plugin.getPrism(), player, lookupResult.getActionResults(), parameters, new DemoApplierCallback() );
 				rs.apply();
 				
 			} else {
