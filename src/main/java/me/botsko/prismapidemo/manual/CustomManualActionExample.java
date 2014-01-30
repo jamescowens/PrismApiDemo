@@ -1,6 +1,6 @@
 package me.botsko.prismapidemo.manual;
 
-import me.botsko.prism.Prism;
+import me.botsko.prism.actionlibs.RecordingQueue;
 import me.botsko.prism.actions.ItemStackAction;
 import me.botsko.prismapidemo.PrismApiDemo;
 
@@ -54,7 +54,7 @@ public class CustomManualActionExample {
 			a.setItem(new ItemStack(1), 1, 0, null);
 			
 			// Add the recorder queue
-			Prism.actionsRecorder.addToQueue(a);
+			RecordingQueue.addToQueue(a);
 
 	        player.sendMessage("Event triggered. Try /demo lookup");
 		}

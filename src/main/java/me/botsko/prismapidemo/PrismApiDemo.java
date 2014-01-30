@@ -1,10 +1,13 @@
 package me.botsko.prismapidemo;
 
+import java.util.regex.Pattern;
+
 import me.botsko.prism.Prism;
 import me.botsko.prism.actionlibs.ActionType;
 import me.botsko.prism.exceptions.InvalidActionException;
 import me.botsko.prismapidemo.customevent.CustomEventExample;
 import me.botsko.prismapidemo.customevent.DemoHandler;
+import me.botsko.prismapidemo.customparam.GroupParameter;
 import me.botsko.prismapidemo.listeners.PrismMiscEvents;
 import me.botsko.prismapidemo.lookup.LookupExample;
 import me.botsko.prismapidemo.manual.CustomManualActionExample;
@@ -90,7 +93,7 @@ public class PrismApiDemo extends JavaPlugin {
 			
 			
 			/**
-			 * Youou must tell Prism that you're registering a new action type.
+			 * You must tell Prism that you're registering a new action type.
 			 * 
 			 * This is normally done in your onEnable, but is here for ease of reading.
 			 * 
@@ -113,6 +116,12 @@ public class PrismApiDemo extends JavaPlugin {
 				// If something you register is incorrect, Prism will let you know in e.getMessage();
 				e.printStackTrace();
 			}
+			
+			
+			/**
+			 * Adds a custom parameter. Use as `pr l group:op`
+			 */
+			Prism.registerParameter( Pattern.compile("(group):([\\w]+)"), new GroupParameter());
 		}
 		
 		getServer().getPluginManager().registerEvents(new PrismMiscEvents(this), this);
