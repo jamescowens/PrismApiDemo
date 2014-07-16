@@ -4,6 +4,7 @@ import me.botsko.prism.actionlibs.RecordingQueue;
 import me.botsko.prism.actions.ItemStackAction;
 import me.botsko.prismapidemo.PrismApiDemo;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -35,8 +36,8 @@ public class CustomManualActionExample {
 			 * an action handler and pass it to the queue.
 			 * 
 			 */
-//			Handler a = ActionFactory.create( "item-drop", new ItemStack(1), null, player.getLocation(), player.getName() );
-//			Prism.actionsRecorder.addToQueue(a);
+//			Handler a = ActionFactory.createItemStack( "item-drop", new ItemStack(1), null, player.getLocation(), player.getName() );
+//			RecordingQueue.addToQueue(a);
 			
 			
 			/**
@@ -51,7 +52,7 @@ public class CustomManualActionExample {
 			a.setPlayerName(player.getName());
 			
 			// Required for the ItemStackAction
-			a.setItem(new ItemStack(1), 1, 0, null);
+			a.setItem(new ItemStack(Material.STONE), 1, 0, null);
 			
 			// Add the recorder queue
 			RecordingQueue.addToQueue(a);

@@ -1,7 +1,5 @@
 package me.botsko.prismapidemo;
 
-import java.util.regex.Pattern;
-
 import me.botsko.prism.Prism;
 import me.botsko.prism.actionlibs.ActionType;
 import me.botsko.prism.exceptions.InvalidActionException;
@@ -121,7 +119,7 @@ public class PrismApiDemo extends JavaPlugin {
 			/**
 			 * Adds a custom parameter. Use as `pr l group:op`
 			 */
-			Prism.registerParameter( Pattern.compile("(group):([\\w]+)"), new GroupParameter());
+			Prism.registerParameter(new GroupParameter());
 		}
 		
 		getServer().getPluginManager().registerEvents(new PrismMiscEvents(this), this);

@@ -1,5 +1,6 @@
 package me.botsko.prismapidemo.customevent;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -40,7 +41,7 @@ public class DemoHandler extends GenericAction {
 		// This message is here for demo only. You should rely on the applier callback to send messages.
 		player.sendMessage("Custom rollback handler drops a stick at your feet. ;) ");
 		// We'll pretend "dropping a stick at your feet" is our custom rollback.
-		player.getWorld().dropItem(player.getLocation(), new ItemStack(280, 1));
+		player.getWorld().dropItem(player.getLocation(), new ItemStack(Material.STICK, 1));
 		return new ChangeResult( ChangeResultType.APPLIED );
 	}
 	
